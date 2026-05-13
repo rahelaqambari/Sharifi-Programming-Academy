@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Livewire\User;
-
-use App\Models\User;
+namespace App\Livewire\Admin;
+use App\Models\Admin ;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -15,8 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
-
-class ListUsers extends Component implements HasActions, HasSchemas, HasTable
+class ListAdmins extends Component implements HasActions, HasSchemas, HasTable
 {
     use InteractsWithActions;
     use InteractsWithTable;
@@ -25,7 +23,7 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(fn (): Builder => User::query())
+            ->query(fn (): Builder => Admin::query())
             ->columns([
                 //
             ])
@@ -47,6 +45,6 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
 
     public function render(): View
     {
-        return view('livewire.user.list-users');
+        return view('livewire.admin.list-admins');
     }
 }

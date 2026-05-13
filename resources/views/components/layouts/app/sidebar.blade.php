@@ -7,7 +7,7 @@
                 display: none !importent;
             }
             @filamentStyles
-            @vite('resources/css/app.css');
+            @vite('resources/css/app.css')
             </style>
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
@@ -22,16 +22,14 @@
                 <flux:navlist.group heading="Platform" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
                 </flux:navlist.group>
-            </flux:navlist>
-             <flux:navlist variant="outline">
-                <flux:navlist.group heading="Manager" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>User</flux:navlist.item>
-                </flux:navlist.group>
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Teacher</flux:navlist.item>
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Student</flux:navlist.item>
-                
-            </flux:navlist>
 
+                 <flux:navlist.group heading="Management" class="grid">
+                    <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>Manage Users</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage Teachers</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('students.index')" wire:navigate>Manage Students</flux:navlist.item>
+                    <flux:navlist.item icon="user" :href="route('users.index')" :current="request()->routeIs('sinf.index')" wire:navigate>Manage Class</flux:navlist.item>
+                </flux:navlist.group>
+            </flux:navlist>
             <flux:spacer />
 
             <flux:navlist variant="outline">
