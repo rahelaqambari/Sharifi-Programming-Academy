@@ -16,6 +16,14 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
+             <flux:navlist variant="outline">
+                <flux:navlist.group heading="Manager" class="grid">
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>User</flux:navlist.item>
+                </flux:navlist.group>
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Teacher</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Student</flux:navlist.item>
+                
+            </flux:navlist>
 
             <flux:spacer />
 
