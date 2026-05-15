@@ -3,6 +3,7 @@
 namespace App\Livewire\Student;
 
 use App\Models\Student ;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -29,11 +30,11 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
             ->query(fn (): Builder => Student::query())
             ->columns([
                 //
-                TextColumn::make('user.name'),
+                TextColumn::make('user.name')->searchable(),
                 TextColumn::make('user.email'),
                 TextColumn::make('last_name'),
-                TextColumn::make('tazkira'),
-                TextColumn::make('phone'),
+                TextColumn::make('tazkira')->toggleable(isToggledHiddenByDefault:false),
+                TextColumn::make('phone')->toggleable(isToggledHiddenByDefault:false),
             ])
             ->filters([
                 //
@@ -43,6 +44,10 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 //
+                   Action::make('delete')->requiresConfirmation()->action(fn (Student $record) => $record->delete($record->id))->successNotification(
+                    Notification::make()
+                    ->title('Saved Successfully')->send()
+                   ),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
