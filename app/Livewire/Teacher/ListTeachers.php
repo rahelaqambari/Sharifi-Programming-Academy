@@ -3,6 +3,7 @@
 namespace App\Livewire\Teacher;
 
 use App\Models\Teacher;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -33,7 +34,7 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('last_name')->sortable()->searchable(),
                 TextColumn::make('degree')->badge(),
                 TextColumn::make('phone')->toggleable(isToggledHiddenByDefault:true),
-                TextColumn::make('bio')->limit(20),
+                TextColumn::make('bio')->limit(20)->toggleable(isToggledHiddenByDefault:true),
             ])
             ->filters([
                 //
@@ -47,6 +48,8 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
             ->toolbarActions([
                 BulkActionGroup::make([
                     //
+                    Action::make('delete')->requiresConfirmation()
+                    ->action(fn (Teacher $record) => $record->delete($record->id))
                 ]),
             ]);
     }
