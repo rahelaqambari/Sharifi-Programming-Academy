@@ -7,6 +7,7 @@ use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\TextColumn;
@@ -49,7 +50,11 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
                 BulkActionGroup::make([
                     //
                     Action::make('delete')->requiresConfirmation()
-                    ->action(fn (Teacher $record) => $record->delete($record->id))
+                    ->action(fn (Teacher $record) => $record->delete($record->id))->color('danger')->successNotification(
+                        Notification::make()
+                        ->title('deleted successfully')
+                        ->success()
+                    )
                 ]),
             ]);
     }

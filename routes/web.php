@@ -25,7 +25,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('manage-users',ListUsers::class)->name('users.index');
     Route::get('manage-students',ListStudents::class)->name('students.index');
-    Route::get('manage-teachers',ListTeachers::class)->name('teacher.index');
+    Route::get('manage-teachers',ListTeachers::class)->name('teachers.index');
+    Route::get('manage-sinfs',ListTeachers::class)->name('sinf.index');
 });
 
 require __DIR__.'/auth.php';
