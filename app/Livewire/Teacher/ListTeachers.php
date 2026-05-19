@@ -34,8 +34,7 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('user.name')->label('Name'),
                 TextColumn::make('last_name')->sortable()->searchable(),
                 TextColumn::make('degree')->badge(),
-                TextColumn::make('salaries.amount')->badge()->limitList(3),
-                TextColumn::make('salaries.amount')->separator(','),
+                TextColumn::make('sinfs.title')->badge()->limitList(3)->separator(','),
                 TextColumn::make('phone')->toggleable(isToggledHiddenByDefault:true),
                 TextColumn::make('bio')->limit(20)->toggleable(isToggledHiddenByDefault:true),
             ])

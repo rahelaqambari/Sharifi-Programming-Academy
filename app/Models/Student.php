@@ -10,6 +10,9 @@ class Student extends Model
         public function user(){
         return $this->belongsTo(User::class);
     }
+       public function sinfs(){
+        return $this->belongsToMany(Sinf::class,'sinf_id');
+    }
 
         public function payment(){
         return $this->hasMany(Payment::class);
