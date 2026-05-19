@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Livewire\Student;
+namespace App\Livewire\Sinf;
 
-use App\Models\Student ;
-use Filament\Actions\Action;
+use App\Models\Sinf;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Notifications\Notification;
+use Filament\Forms\Components\DatePicker;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
-
-class ListStudents extends Component implements HasActions, HasSchemas, HasTable
+class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
 {
     use InteractsWithActions;
     use InteractsWithTable;
@@ -28,28 +27,28 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(fn (): Builder => Student::query())
+            ->query(fn (): Builder => Sinf::query())
             ->columns([
                 //
-                TextColumn::make('user.name')->searchable(),
-                TextColumn::make('user.email')->label('Email'),
-                TextColumn::make('last_name'),
-                TextColumn::make('payment.sinf.user.name')->label('students')->separator(','),
-                TextColumn::make('tazkira')->toggleable(isToggledHiddenByDefault:false),
-                TextColumn::make('phone')->toggleable(isToggledHiddenByDefault:false),
-            ])
+                TextColumn::make('title')->label('Course Name')->searchable(),
+                 TextColumn::make('teacher.user.name')->label('Teacher Name')->badge(),
+                 TextColumn::make('payment.student.user.name')->label('students')->separator(','),
+                 TextColumn::make('start_date'),
+                 TextColumn::make('end_date')->toggleable(isToggledHiddenByDefault:true),
+                 TextColumn::make('description')->limit(20)
+                 ])
             ->filters([
                 //
+                Filter::make('start_date')
+                ->schema([
+                    DatePicker::make('start_date')
+                ])
             ])
             ->headerActions([
                 //
             ])
             ->recordActions([
                 //
-                   Action::make('delete')->requiresConfirmation()->action(fn (Student $record) => $record->delete($record->id))->successNotification(
-                    Notification::make()
-                    ->title('Saved Successfully')->send()
-                   ),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -60,6 +59,6 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
 
     public function render(): View
     {
-        return view('livewire.student.list-students');
+        return view('livewire.sinf.list-sinfs');
     }
 }

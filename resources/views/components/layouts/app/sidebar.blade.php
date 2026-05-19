@@ -32,7 +32,7 @@
 
 
                  <flux:navlist.group heading="Finance" class="grid">
-                    <flux:navlist.item icon="banknotes" :href="route('payment.index')" :current="request()->routeIs('users.index')" wire:navigate>Manage Users</flux:navlist.item>
+                    <flux:navlist.item icon="banknotes" :href="route('payment.index')" :current="request()->routeIs('users.index')" wire:navigate>Students Payment</flux:navlist.item>
                     <flux:navlist.item icon="scale" :href="route('teachers.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage Teachers</flux:navlist.item>
                 </flux:navlist.group>
 
