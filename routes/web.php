@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Payment\ListPayments;
+use App\Livewire\Sinf\CreateSinf;
 use App\Livewire\Sinf\ListSinfs;
 use App\Livewire\Student\ListStudents;
 use App\Livewire\Teacher\ListTeachers;
@@ -30,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('manage-teachers',ListTeachers::class)->name('teachers.index');
     Route::get('manage-sinfs',ListSinfs::class)->name('sinf.index');
     Route::get('/finance-payment',ListPayments::class)->name('payment.index');
+    Route::get('/sinf/create',CreateSinf::class)->name('sinf.create');
 });
 
 require __DIR__.'/auth.php';
