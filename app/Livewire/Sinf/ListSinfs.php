@@ -40,9 +40,18 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
             ->filters([
                 //
                 Filter::make('start_date')
-                ->schema([
+                ->label('Filter by Start Date')
+                ->form([
                     DatePicker::make('start_date')
+                    ->label('Strat Date'),
                 ])
+                ->query(function (Builder $query, array $data): Builder{
+                    return $query->when(
+                        $data['start_date'],
+                        fn (Builder $query, $data): Builder =>
+                        $query->whereDate('start_date','=', $data),
+                    );
+                })
             ])
             ->headerActions([
                 //
