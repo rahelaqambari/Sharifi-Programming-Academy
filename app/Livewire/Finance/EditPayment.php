@@ -5,6 +5,8 @@ namespace App\Livewire\Finance;
 use App\Models\Payment;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
@@ -30,6 +32,12 @@ class EditPayment extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                 //
+                Section::make('Edit Payment')
+                ->description('You Can Edit The Spicefic Payment .')
+                ->columns(2)
+                ->schema([
+                    TextInput::make('amount')->numeric(),
+                ])
             ])
             ->statePath('data')
             ->model($this->record);

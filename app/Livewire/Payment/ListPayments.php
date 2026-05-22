@@ -42,7 +42,10 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
                 Action::make('edit')
                 ->url(fn (Payment $record): string => route('payment.update',$record))
                 ->openUrlInNewTab(),
-                
+
+                Action::make('delete')
+                ->requiresConfirmation()
+                ->action(fn (Payment $record) => $record->delete($record->id))
             ])
             ->recordActions([
                 //
