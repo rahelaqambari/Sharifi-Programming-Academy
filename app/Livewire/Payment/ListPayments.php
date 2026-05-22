@@ -3,6 +3,7 @@
 namespace App\Livewire\Payment;
 
 use App\Models\Payment;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -38,6 +39,10 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
+                Action::make('edit')
+                ->url(fn (Payment $record): string => route('payment.update',$record))
+                ->openUrlInNewTab(),
+                
             ])
             ->recordActions([
                 //
