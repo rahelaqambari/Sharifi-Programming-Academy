@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Finance;
+namespace App\Livewire\Payment;
 
 use App\Models\Payment;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -32,7 +32,7 @@ class EditPayment extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                 //
-                Section::make('Edit Payment')
+              Section::make('Edit Payment')
                 ->description('You Can Edit The Spicefic Payment .')
                 ->columns(2)
                 ->schema([
@@ -52,6 +52,6 @@ class EditPayment extends Component implements HasActions, HasSchemas
 
     public function render(): View
     {
-        return view('livewire.finance.edit-payment');
+        return view('livewire.payment.edit-payment');
     }
 }

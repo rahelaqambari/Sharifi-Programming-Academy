@@ -39,6 +39,10 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
+                
+            ])
+            ->recordActions([
+                //
                 Action::make('edit')
                 ->url(fn (Payment $record): string => route('payment.update',$record))
                 ->openUrlInNewTab(),
@@ -46,9 +50,6 @@ class ListPayments extends Component implements HasActions, HasSchemas, HasTable
                 Action::make('delete')
                 ->requiresConfirmation()
                 ->action(fn (Payment $record) => $record->delete($record->id))
-            ])
-            ->recordActions([
-                //
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
