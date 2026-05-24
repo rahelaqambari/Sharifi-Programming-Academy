@@ -8,7 +8,7 @@ class Sinf extends Model
 {
     //
     protected $fillable = [
-        'titel',
+        'title',
         'start_date',
         'end_date',
         'description',

@@ -1,26 +1,22 @@
 <?php
 
-namespace App\Livewire\Sinf;
+namespace App\Livewire\Teacher;
 
-use App\Models\Sinf;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
+use Teacher;
 
-
-class EditSinf extends Component implements HasActions, HasSchemas
+class EditTeacher extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
 
-    public Sinf $record;
+    public Teacher $record;
 
     public ?array $data = [];
 
@@ -34,15 +30,6 @@ class EditSinf extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                 //
-                  Section::make('Edit Class Info')
-                ->description('You Can Edit The Spicefic Classes Information .')
-                ->columns(2)
-                ->schema([
-                    TextInput::make('title')->label('Course Name'),
-                    TextInput::make('start_date'),
-                    TextInput::make('end_date'),
-                    Textarea::make('description')->autosize(),
-                ])
             ])
             ->statePath('data')
             ->model($this->record);
@@ -57,6 +44,6 @@ class EditSinf extends Component implements HasActions, HasSchemas
 
     public function render(): View
     {
-        return view('livewire.sinf.edit-sinf');
+        return view('livewire.teacher.edit-teacher');
     }
 }
