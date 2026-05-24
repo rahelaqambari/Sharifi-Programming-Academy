@@ -3,6 +3,7 @@
 namespace App\Livewire\Sinf;
 
 use App\Models\Sinf;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -58,6 +59,13 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->recordActions([
                 //
+                Action::make('edit')
+                ->url(fn (Sinf $record): string => route('sinf.update',$record))
+                ->openUrlInNewTab(),
+
+                Action::make('delete')
+                ->requiresConfirmation()
+                ->action(fn (Sinf $record) => $record->delete($record->id))
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

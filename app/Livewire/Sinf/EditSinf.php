@@ -5,6 +5,9 @@ namespace App\Livewire\Sinf;
 use App\Models\Sinf;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
@@ -31,6 +34,15 @@ class EditSinf extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                 //
+                  Section::make('Edit Payment')
+                ->description('You Can Edit The Spicefic Payment .')
+                ->columns(2)
+                ->schema([
+                    TextInput::make('title')->label('Course Name'),
+                    TextInput::make('start_date')->format('Y-m-d'),
+                    TextInput::make('end_date')->format('Y-m-d'),
+                    Textarea::make('description')->autosize(),
+                ])
             ])
             ->statePath('data')
             ->model($this->record);
