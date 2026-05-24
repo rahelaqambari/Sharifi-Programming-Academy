@@ -2,14 +2,17 @@
 
 namespace App\Livewire\Teacher;
 
+use App\Models\Teacher;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
-use Teacher;
 
 class EditTeacher extends Component implements HasActions, HasSchemas
 {
@@ -29,7 +32,16 @@ class EditTeacher extends Component implements HasActions, HasSchemas
     {
         return $schema
             ->components([
-                //
+                
+             Section::make('Edit Teacher Info')
+                ->description('You Can Edit The Spicefic Teacher Information .')
+                ->columns(2)
+                ->schema([
+                    TextInput::make('last_name'),
+                    TextInput::make('degree'),
+                    TextInput::make('phone'),
+                    Textarea::make('bio')->autosize(),
+                ])
             ])
             ->statePath('data')
             ->model($this->record);
