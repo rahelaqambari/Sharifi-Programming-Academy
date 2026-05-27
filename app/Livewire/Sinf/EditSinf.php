@@ -5,6 +5,7 @@ namespace App\Livewire\Sinf;
 use App\Models\Sinf;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -39,8 +40,8 @@ class EditSinf extends Component implements HasActions, HasSchemas
                 ->columns(2)
                 ->schema([
                     TextInput::make('title')->label('Course Name'),
-                    TextInput::make('start_date'),
-                    TextInput::make('end_date'),
+                    DatePicker::make('start_date')->format('Y-m-d')->timezone('Asia/Kabul'),
+                    DatePicker::make('end_date')->format('Y-m-d')->timezone('Asia/Kabul'),
                     Textarea::make('description')->autosize(),
                 ])
             ])
