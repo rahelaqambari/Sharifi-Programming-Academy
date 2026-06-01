@@ -5,6 +5,7 @@ use App\Livewire\Payment\ListPayments;
 use App\Livewire\Sinf\CreateSinf;
 use App\Livewire\Sinf\EditSinf;
 use App\Livewire\Sinf\ListSinfs;
+use App\Livewire\Student\EditStudent;
 use App\Livewire\Student\ListStudents;
 use App\Livewire\Teacher\EditTeacher;
 use App\Livewire\Teacher\ListTeachers;
@@ -31,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('manage-users',ListUsers::class)->name('users.index');
     Route::get('manage-students',ListStudents::class)->name('students.index');
+    Route::get('manage-student/{record}',EditStudent::class)->name('student.update');
     Route::get('manage-teachers',ListTeachers::class)->name('teachers.index');
     Route::get('manage-teachers/{record}',EditTeacher::class)->name('teacher.update');
     Route::get('manage-sinfs',ListSinfs::class)->name('sinf.index');
