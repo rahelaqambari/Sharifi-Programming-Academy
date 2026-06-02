@@ -7,12 +7,14 @@ use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -40,6 +42,19 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->filters([
                 //
+                Filter::make('Student Name')
+                ->label('Filter by Student Name')
+                ->form([
+                    TextInput::make('user.name')
+                    ->label('Student Name'),
+                ])
+                ->query(function (Builder $query, array $data): Builder{
+                    return $query->when(
+                        $data['start_date'],
+                        fn (Builder $query, $data): Builder =>
+                        $query->whereDate('start_date','=', $data),
+                    );
+                })
             ])
             ->headerActions([
                 //
