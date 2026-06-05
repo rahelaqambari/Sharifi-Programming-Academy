@@ -48,13 +48,13 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
                     TextInput::make('user.name')
                     ->label('Student Name'),
                 ])
-                ->query(function (Builder $query, array $data): Builder{
-                    return $query->when(
-                        $data['start_date'],
-                        fn (Builder $query, $data): Builder =>
-                        $query->whereDate('start_date','=', $data),
-                    );
-                })
+                // ->query(function (Builder $query, array $data): Builder{
+                //     return $query->when(
+                //         $data['start_date'],
+                //         fn (Builder $query, $data): Builder =>
+                //         $query->whereDate('start_date','=', $data),
+                //     );
+                // })
             ])
             ->headerActions([
                 //
