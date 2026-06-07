@@ -26,6 +26,7 @@
                  <flux:navlist.group heading="Management" class="grid">
                     <flux:navlist.item icon="user-group" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>Manage Users</flux:navlist.item>
                     <flux:navlist.item icon="user-circle" :href="route('teachers.index')" :current="request()->routeIs('teachers.index')" wire:navigate>Manage Teachers</flux:navlist.item>
+                    <flux:navlist.item icon="user-plus" :href="route('teachers.create')" :current="request()->routeIs('teachers.create')" wire:navigate>Create Teacher</flux:navlist.item>
                     <flux:navlist.item icon="academic-cap" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>Manage Students</flux:navlist.item>
                     <flux:navlist.item icon="building-library" :href="route('sinf.index')" :current="request()->routeIs('sinf.index')" wire:navigate>Manage Class</flux:navlist.item>
                 </flux:navlist.group>
