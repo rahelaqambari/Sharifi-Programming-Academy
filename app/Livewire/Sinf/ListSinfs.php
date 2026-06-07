@@ -64,7 +64,7 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
                 ->openUrlInNewTab(),
 
                 Action::make('delete')
-                ->requiresConfirmation()
+                ->requiresConfirmation()->color('')
                 ->action(fn (Sinf $record) => $record->delete($record->id))
             ])
             ->toolbarActions([
