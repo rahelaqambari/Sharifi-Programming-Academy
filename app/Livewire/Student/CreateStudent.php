@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Teacher;
+namespace App\Livewire\Student;
 
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -9,13 +9,12 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
-use App\Models\Teacher;
+use App\Models\Student;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 
-class CreateTeacher extends Component implements HasActions, HasSchemas
+class CreateStudent extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
@@ -31,33 +30,33 @@ class CreateTeacher extends Component implements HasActions, HasSchemas
     {
         return $schema
             ->components([
-                  Section::make('Add New Teacher')
-                ->description('You Can Add New Teacher Here.')
+                //
+                 Section::make('Add New Student')
+                ->description('You Can Add New Student Here.')
                 ->schema([
                     // ...
                     TextInput::make('last_name'),
-                    TextInput::make('degree'),
+                    FileUpload::make('img_url')->directory('student_images'),
                     TextInput::make('phone'),
-                    FileUpload::make('img_url')->directory('images'),
-                    Textarea::make('bio')->autosize(),
+                    TextInput::make('tazkira'),
                     TextInput::make('user_id'),
                 ])
             ])
             ->statePath('data')
-            ->model(Teacher::class);
+            ->model(Student::class);
     }
 
     public function create(): void
     {
         $data = $this->form->getState();
 
-        $record = Teacher::create($data);
+        $record = Student::create($data);
 
         $this->form->model($record)->saveRelationships();
     }
 
     public function render(): View
     {
-        return view('livewire.teacher.create-teacher');
+        return view('livewire.student.create-student');
     }
 }

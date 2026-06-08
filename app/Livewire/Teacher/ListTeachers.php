@@ -10,6 +10,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -34,6 +35,7 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
                 TextColumn::make('user.name')->label('Name'),
                 TextColumn::make('last_name')->sortable()->searchable(),
                 TextColumn::make('degree')->badge(),
+                ImageColumn::make('img_url'),
                 TextColumn::make('sinfs.title')->badge()->limitList(3)->separator(','),
                 TextColumn::make('phone')->toggleable(isToggledHiddenByDefault:true),
                 TextColumn::make('bio')->limit(20)->toggleable(isToggledHiddenByDefault:true),
