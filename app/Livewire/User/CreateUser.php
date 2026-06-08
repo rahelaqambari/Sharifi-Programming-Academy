@@ -9,7 +9,9 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
-use User;
+use App\Models\User;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 
 class CreateUser extends Component implements HasActions, HasSchemas
 {
@@ -28,6 +30,15 @@ class CreateUser extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                 //
+                 Section::make('Add New User')
+                ->description('You Can Add New User Here.')
+                ->schema([
+                    // ...
+                    TextInput::make('name'),
+                    TextInput::make('email'),
+                    TextInput::make('password'),
+                    TextInput::make('role'),
+                ])
             ])
             ->statePath('data')
             ->model(User::class);

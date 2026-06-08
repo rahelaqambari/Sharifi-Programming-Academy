@@ -10,7 +10,9 @@ use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use App\Models\Teacher;
+use App\Models\User;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -38,9 +40,9 @@ class CreateTeacher extends Component implements HasActions, HasSchemas
                     TextInput::make('last_name'),
                     TextInput::make('degree'),
                     TextInput::make('phone'),
-                    FileUpload::make('img_url')->directory('images'),
+                    FileUpload::make('img_url')->directory('teacher_images')->disk('public'),
                     Textarea::make('bio')->autosize(),
-                    TextInput::make('user_id'),
+                    Select::make('user_id')->options(User::query()->pluck('name','id'))->loadingMessage('Loading...')->searchable(),
                 ])
             ])
             ->statePath('data')

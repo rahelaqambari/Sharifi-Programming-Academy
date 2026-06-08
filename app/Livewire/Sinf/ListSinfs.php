@@ -56,6 +56,9 @@ class ListSinfs extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
+                 Action::make('createclass')->color('primary')->label('Create New Class')
+                ->url(route('sinf.create')),
+                
             ])
             ->recordActions([
                 //

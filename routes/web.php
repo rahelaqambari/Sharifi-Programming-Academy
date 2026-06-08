@@ -11,6 +11,7 @@ use App\Livewire\Student\ListStudents;
 use App\Livewire\Teacher\CreateTeacher;
 use App\Livewire\Teacher\EditTeacher;
 use App\Livewire\Teacher\ListTeachers;
+use App\Livewire\User\CreateUser;
 use App\Livewire\User\ListUsers;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('manage-users',ListUsers::class)->name('users.index');
+    Route::get('user-create',CreateUser::class)->name('users.create');
     Route::get('manage-students',ListStudents::class)->name('students.index');
     Route::get('student-create',CreateStudent::class)->name('students.create');
     Route::get('manage-student/{record}',EditStudent::class)->name('student.update');

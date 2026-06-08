@@ -58,6 +58,8 @@ class ListStudents extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
+                 Action::make('createStudent')->color('primary')->label('Create New Student')
+                ->url(route('students.create')),
             ])
             ->recordActions([
                 //
