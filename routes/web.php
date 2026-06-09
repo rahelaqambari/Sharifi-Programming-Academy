@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('student-create',CreateStudent::class)->name('students.create');
     Route::get('manage-student/{record}',EditStudent::class)->name('student.update');
     Route::get('manage-teachers',ListTeachers::class)->name('teachers.index');
-    Route::get('teacher-create',CreateTeacher::class)->name('teachers.create');
+    // Route::get('teacher-create',CreateTeacher::class)->name('teachers.create');
     Route::get('manage-teachers/{record}',EditTeacher::class)->name('teacher.update');
     Route::get('manage-sinfs',ListSinfs::class)->name('sinf.index');
     Route::get('sinfs-create',CreateSinf::class)->name('sinf.create');
