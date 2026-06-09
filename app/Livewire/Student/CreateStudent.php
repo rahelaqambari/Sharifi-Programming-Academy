@@ -10,7 +10,9 @@ use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use App\Models\Student;
+use App\Models\User;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 
@@ -39,7 +41,7 @@ class CreateStudent extends Component implements HasActions, HasSchemas
                     FileUpload::make('img_url')->directory('student_images'),
                     TextInput::make('phone'),
                     TextInput::make('tazkira'),
-                    TextInput::make('user_id'),
+                    Select::make('user_id')->options(User::query()->pluck('name','id'))->loadingMessage('Loading...')->searchable(),
                 ])
             ])
             ->statePath('data')

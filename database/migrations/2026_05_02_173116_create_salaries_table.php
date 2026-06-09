@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('month');
             $table->integer('day');
             $table->integer('amount');
-            $table->foreignId('teacher_id')->constrained('teachers','id');
+            $table->foreignId('teacher_id')->constrained('teachers','id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

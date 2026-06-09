@@ -39,6 +39,8 @@ class ListUsers extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
+                 Action::make('createUser')->color('primary')->label('Create New User')
+                ->url(route('users.create')),
             ])
             ->recordActions([
                 //
