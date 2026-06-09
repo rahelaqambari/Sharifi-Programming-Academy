@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('amount');
             $table->foreignId('teacher_id')->constrained('teachers','id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+              $table->foreignId('teacher_id')->constrained('teachers','id')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 
