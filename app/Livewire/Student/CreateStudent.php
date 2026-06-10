@@ -36,14 +36,14 @@ class CreateStudent extends Component implements HasActions, HasSchemas
             ->components([
                 //
                  Wizard::make([
-                    Step::make('User')
+                    Step::make('User')->description('Form for adding new user')
                     ->schema([
                     TextInput::make('name'),
                     TextInput::make('email')->required(),
                     TextInput::make('password'),
                     TextInput::make('role')->default('Student'),
                     ]),
-                    Step::make('Student')
+                    Step::make('Student')->description('Form for adding new Student')
                     ->schema([
                     TextInput::make('last_name')->required(),
                     TextInput::make('phone'),
@@ -65,7 +65,7 @@ class CreateStudent extends Component implements HasActions, HasSchemas
                 'name'=> $data['name'],
                 'email'=> $data['email'],
                 'password'=> $data['password'],
-                'role'=> 'teacher',
+                'role'=> 'student',
             ]);
             $user->student()->create([
              'last_name'=> $data['last_name'],

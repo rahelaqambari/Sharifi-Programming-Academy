@@ -15,6 +15,7 @@ use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
 
@@ -46,14 +47,14 @@ class CreateTeacher extends Component implements HasActions, HasSchemas
                     Step::make('Teacher')
                     ->schema([
                     TextInput::make('last_name')->required(),
-                    Select::make('Degree_of_Education')
+                    Select::make('degree')
                     ->options([
                         'Secondry School' => 'Secondry School',
                         'Bachelor Degree' => 'Bachelor Degree',
                         'Master Degree' => 'Master Degree',
                         'PHD' => 'PHD',
                     ]),
-                    Select::make('Field_of_Education')
+                    Select::make('field_of_education')
                     ->options([
                         'Secondry School' => 'Secondry School',
                         'Computer Scinces' => 'Computer Scinces',
@@ -75,20 +76,26 @@ class CreateTeacher extends Component implements HasActions, HasSchemas
 
     public function submit(): void
     {
-        // $data = $this->form->getState();
-        // DB::transaction(function () use ($data){
-        //    $user = User::create([
-        //         'name'=> $data['name'],
-        //         'email'=> $data['email'],
-        //         'password'=> $data['password'],
-        //         'role'=> 'teacher',
-        //     ]);
-        //     $user->teacher()->create([
-            
-        //     ]);
-        // });
+        $data = $this->form->getState();
+        DB::transaction(function () use ($data){
+           $user = User::create([
+                'name'=> $data['name'],
+                'email'=> $data['email'],
+                'password'=> $data['password'],
+                'role'=> 'teacher',
+            ]);
+            $user->teacher()->create([
+            'last_name'=> $data['last_name'],
+                'phone'=> $data['phone'],
+                'img_url'=> $data['img_url'],
+                'bio'=> $data['bio'],
+                'degree'=> $data['degree'],
+                'field_of_education'=> $data['field_of_education'],
+            ]);
+            return redirect()->route('teachers.index');
+        });
 
-        //
+        
     }
 
     public function render(): View
