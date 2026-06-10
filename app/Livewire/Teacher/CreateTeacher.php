@@ -2,12 +2,20 @@
 
 namespace App\Livewire\Teacher;
 
+use App\Models\User;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Wizard;
+use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\HtmlString;
 use Livewire\Component;
 
 class CreateTeacher extends Component implements HasActions, HasSchemas
@@ -27,13 +35,58 @@ class CreateTeacher extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                 //
+                Wizard::make([
+                    Step::make('User')
+                    ->schema([
+                    TextInput::make('name'),
+                    TextInput::make('email')->required(),
+                    TextInput::make('password'),
+                    TextInput::make('role')->default('teacher'),
+                    ]),
+                    Step::make('Teacher')
+                    ->schema([
+                    TextInput::make('last_name')->required(),
+                    Select::make('Degree_of_Education')
+                    ->options([
+                        'Secondry School' => 'Secondry School',
+                        'Bachelor Degree' => 'Bachelor Degree',
+                        'Master Degree' => 'Master Degree',
+                        'PHD' => 'PHD',
+                    ]),
+                    Select::make('Field_of_Education')
+                    ->options([
+                        'Secondry School' => 'Secondry School',
+                        'Computer Scinces' => 'Computer Scinces',
+                        'Political Scinces' => 'Political Scinces',
+                        'Ecommerce' => 'Ecommerce',
+                        'English Litretured' => 'English Litretured',
+                        'Envirmante Science' => 'Envirmante Science',
+                        'Civil Engeinering' => 'Civil Engeinering',
+                        'Electoraction Engeinering' => 'Electoraction Engeinering',
+                    ]),
+                    TextInput::make('phone'),
+                    FileUpload::make('img_url')->directory('Teacher_images'),
+                    Textarea::make('bio'),
+                    ])
+                ])->submitAction(new HtmlString('<button type="submite">Save</button>'))
             ])
             ->statePath('data');
     }
 
     public function submit(): void
     {
-        $data = $this->form->getState();
+        // $data = $this->form->getState();
+        // DB::transaction(function () use ($data){
+        //    $user = User::create([
+        //         'name'=> $data['name'],
+        //         'email'=> $data['email'],
+        //         'password'=> $data['password'],
+        //         'role'=> 'teacher',
+        //     ]);
+        //     $user->teacher()->create([
+            
+        //     ]);
+        // });
 
         //
     }

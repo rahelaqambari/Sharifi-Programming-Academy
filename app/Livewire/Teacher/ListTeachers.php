@@ -45,7 +45,7 @@ class ListTeachers extends Component implements HasActions, HasSchemas, HasTable
             ])
             ->headerActions([
                 //
-                Action::make('createTeacher')->color('primary')->label('Create Teacher')
+                Action::make('createTeacher')->label('Create Teacher')
                 ->url(route('teachers.create')),
             ])
             ->recordActions([
