@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Finance\CreatePayment;
 use App\Livewire\Finance\EditPayment;
 use App\Livewire\Payment\ListPayments;
 use App\Livewire\Sinf\CreateSinf;
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('sinfs-create',CreateSinf::class)->name('sinf.create');
     Route::get('/manage-sinfs/{record}',EditSinf::class)->name('sinf.update');
     Route::get('/finance-payment',ListPayments::class)->name('payment.index');
+    Route::get('/finance-payment-create',CreatePayment::class)->name('payment.create');
     Route::get('/finance-payment/{record}',EditPayment::class)->name('payment.update');
 });
 

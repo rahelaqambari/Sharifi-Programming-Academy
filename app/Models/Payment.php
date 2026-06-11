@@ -8,6 +8,8 @@ class Payment extends Model
 {
     protected $fillable = [
         'amount',
+        'sinf_id',
+        'student_id'
     ];
     //
        public function student(){
