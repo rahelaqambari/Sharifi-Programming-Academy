@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Livewire\Student;
+namespace App\Livewire\Finance;
 
-use App\Models\User;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
@@ -15,11 +13,10 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
 
-class CreateStudent extends Component implements HasActions, HasSchemas
+class CreatePayment extends Component implements HasActions, HasSchemas
 {
     use InteractsWithActions;
     use InteractsWithSchemas;
@@ -36,7 +33,7 @@ class CreateStudent extends Component implements HasActions, HasSchemas
         return $schema
             ->components([
                 //
-                 Wizard::make([
+                Wizard::make([
                     Step::make('User')->icon(Heroicon::User)->description('Form for adding new user')->columns(2)
                     ->schema([
                     TextInput::make('name'),
@@ -59,27 +56,12 @@ class CreateStudent extends Component implements HasActions, HasSchemas
     public function submit(): void
     {
         $data = $this->form->getState();
-        $data = $this->form->getState();
-        DB::transaction(function () use ($data){
-           $user = User::create([
-                'name'=> $data['name'],
-                'email'=> $data['email'],
-                'password'=> $data['password'],
-                'role'=> 'student',
-            ]);
-            $user->student()->create([
-             'last_name'=> $data['last_name'],
-                'phone'=> $data['phone'],
-                'img_url'=> $data['img_url'],
-                'tazkira'=> $data['tazkira'],
-            ]);
-            return redirect()->route('students.index');
-        });
+
         //
     }
 
     public function render(): View
     {
-        return view('livewire.student.create-student');
+        return view('livewire.finance.create-payment');
     }
 }
