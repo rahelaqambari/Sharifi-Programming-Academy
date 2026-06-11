@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Finance;
 
+use App\Models\User;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\FileUpload;
@@ -13,6 +14,7 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
 
@@ -34,19 +36,24 @@ class CreatePayment extends Component implements HasActions, HasSchemas
             ->components([
                 //
                 Wizard::make([
-                    Step::make('User')->icon(Heroicon::User)->description('Form for adding new user')->columns(2)
+                    Step::make('User')->icon(Heroicon::User)->description('Information aboute  new user')->columns(2)
                     ->schema([
                     TextInput::make('name'),
-                    TextInput::make('email')->required(),
+                    TextInput::make('email')->required()->type('email'),
                     TextInput::make('password'),
                     TextInput::make('role')->default('Student'),
                     ]),
-                    Step::make('Student')->description('Form for adding new Student')->completedIcon(Heroicon::Check)->icon(Heroicon::AcademicCap)
+                    Step::make('Student')->description('Information aboute new Student')->completedIcon(Heroicon::Check)->icon(Heroicon::AcademicCap)
                     ->schema([
                     TextInput::make('last_name')->required(),
                     TextInput::make('phone'),
                     TextInput::make('tazkira'),
                     FileUpload::make('img_url')->directory('student_images'),
+                    ]),
+                     Step::make('Payment')->description('Information aboute Payment')->completedIcon(Heroicon::Check)->icon(Heroicon::Banknotes)
+                    ->schema([
+                    TextInput::make('amount'),
+                    
                     ])
                 ])->submitAction(new HtmlString('<button type="submite">Save</button>'))
             ])
@@ -56,7 +63,21 @@ class CreatePayment extends Component implements HasActions, HasSchemas
     public function submit(): void
     {
         $data = $this->form->getState();
-
+        $data = $this->form->getState();
+        DB::transaction(function () use ($data){
+           $user = User::create([
+                'name'=> $data['name'],
+                'email'=> $data['email'],
+                'password'=> $data['password'],
+            ]);
+            $user->student()->create([
+             'last_name'=> $data['last_name'],
+                'phone'=> $data['phone'],
+                'img_url'=> $data['img_url'],
+                'tazkira'=> $data['tazkira'],
+            ]);
+            return redirect()->route('students.index');
+        });
         //
     }
 
